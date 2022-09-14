@@ -29,6 +29,22 @@ public class Character {
     private int health;
     private int speed;
 
+    public Character(String name, String appearance, String background, ArrayList<Quirk> quirks,
+            ArrayList<Skill> skills, int strength, int dexterity, int intelligence, int health, int speed) {
+        this.name = name;
+        this.appearance = appearance;
+        this.background = background;
+        this.quirks = quirks;
+        this.skills = skills;
+        this.strength = strength;
+        this.dexterity = dexterity;
+        this.intelligence = intelligence;
+        this.health = health;
+        this.speed = speed;
+
+        this.inventory = new Inventory();
+    }
+
     /**
      * Adds Iteam to the inventory of Character
      * @param iteam Iteam to be added
@@ -63,5 +79,9 @@ public class Character {
 
     public void setBackground(String background) {
         this.background = background;
+    }
+
+    public String getName() {
+        return this.name;
     }
 }
