@@ -45,7 +45,6 @@ public class CharacterCreator {
 
 
         return new Character(name, appearance, background, null, null, st, dex, in, hlt, spd);
-
     }
 
     private List<String> getStringList() {
