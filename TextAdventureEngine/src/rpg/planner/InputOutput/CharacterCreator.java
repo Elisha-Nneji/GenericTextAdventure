@@ -10,6 +10,13 @@ public class CharacterCreator {
 
     private String LIST_REGEX = "(.+)(;.+)*";
     private String LIST_SEPARATOR = ";";
+    private String ABORT_COMMAND = "abort";
+    private String HELP_COMMAND = "help";
+    private String HELP = "HELP    - prints this help-message\n"
+                        + "OPTIONS - shows the different options that you can choose from\n"
+                        + "ABORT   - aborts the character creation";
+    private String OPTIONS_COMMAND = "options";
+
     private Scanner s;
 
     public CharacterCreator() {
@@ -43,9 +50,22 @@ public class CharacterCreator {
         System.out.println("Skills: (SEPARATED BY " + LIST_SEPARATOR + ")");
         List<String> skills = getStringList();
 
-
         return new Character(name, appearance, background, null, null, st, dex, in, hlt, spd);
     }
+
+    private String getInfo(String requestMessage) {
+        System.out.println(requestMessage);
+        String input = s.nextLine().trim();
+        if (input.equalsIgnoreCase(ABORT_COMMAND)) {
+            throw new IllegalArgumentException("Character creation aborted.");
+        } else if (input.equalsIgnoreCase(HELP_COMMAND)) {
+            System.out.println(HELP);
+        } else if (input.equalsIgnoreCase(OPTIONS_COMMAND)) {
+
+        }
+    }
+
+
 
     private List<String> getStringList() {
         boolean listGotten = false;
