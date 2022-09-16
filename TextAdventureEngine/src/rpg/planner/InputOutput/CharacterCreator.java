@@ -16,52 +16,67 @@ public class CharacterCreator {
                         + "OPTIONS - shows the different options that you can choose from\n"
                         + "ABORT   - aborts the character creation";
     private String OPTIONS_COMMAND = "options";
+    private String REQUEST_INPUT_NAME = "Name:";
+    private String REQUEST_INPUT_APPEARANCE = "Appearance:";
+    private String REQUEST_INPUT_BACKGROUND = "Background:";
+    private String REQUEST_INPUT_STRENGTH = "Strength:";
+    private String REQUEST_INPUT_DEXTERITY = "Dexterity:";
+    private String REQUEST_INPUT_INTELLIGENCE = "Intelligence:";
+    private String REQUEST_INPUT_HEALTH = "Health:";
+    private String REQUEST_INPUT_SPEED = "Speed:";
+    private String REQUEST_INPUT_QUIRKS = "Quirks: (SEPARATED BY " + LIST_SEPARATOR + ")";
+    private String REQUEST_INPUT_SKILLS = "Skills: (SEPARATED BY " + LIST_SEPARATOR + ")";
 
     private Scanner s;
+    private enum exceptionalCase {
+        ABORT,
+        OPTIONS,
+        HELP;
+    }
+
+    private exceptionalCase excCase;
+    private boolean abortGame;
 
     public CharacterCreator() {
         this.s = new Scanner(System.in);
     }
 
-    public Character createCharacter() {
-        System.out.println("Name:");
-        String name = s.nextLine();
-        System.out.println("Appearance:");
-        String appearance = s.nextLine();
-        System.out.println("Background:");
-        String background = s.nextLine();
-        System.out.println("Strength:");
-        String strength = s.nextLine();
-        int st = Integer.parseInt(strength);
-        System.out.println("Dexterity:");
-        String dexterity = s.nextLine();
-        int dex = Integer.parseInt(dexterity);
-        System.out.println("Intelligence:");
-        String intelligence = s.nextLine();
-        int in = Integer.parseInt(intelligence);
-        System.out.println("Health:");
-        String health = s.nextLine();
-        int hlt = Integer.parseInt(health);
-        System.out.println("Speed:");
-        String speed = s.nextLine();
-        int spd = Integer.parseInt(speed);
-        System.out.println("Quirks: (SEPARATED BY " + LIST_SEPARATOR + ")");
+    public Character createCharacter() throws AbortException {
+        String name = getInfo(REQUEST_INPUT_NAME);
+        String appearance = getInfo(REQUEST_INPUT_APPEARANCE);
+        String background = getInfo(REQUEST_INPUT_BACKGROUND);
+        int st = Integer.parseInt(getInfo(REQUEST_INPUT_STRENGTH)); //TODO: options anzeigen
+        int dex = Integer.parseInt(getInfo(REQUEST_INPUT_DEXTERITY));
+        int in = Integer.parseInt(getInfo(REQUEST_INPUT_INTELLIGENCE));
+        int hlt = Integer.parseInt(getInfo(REQUEST_INPUT_HEALTH));
+        System.out.println(REQUEST_INPUT_QUIRKS);
         List<String> quirks = getStringList();
-        System.out.println("Skills: (SEPARATED BY " + LIST_SEPARATOR + ")");
+        System.out.println(REQUEST_INPUT_SKILLS);
         List<String> skills = getStringList();
 
-        return new Character(name, appearance, background, null, null, st, dex, in, hlt, spd);
+        return new Character(name, appearance, background, null, null, st, dex, in, hlt);
     }
 
-    private String getInfo(String requestMessage) {
+    private String getInfo(String requestMessage) throws AbortException {
         System.out.println(requestMessage);
         String input = s.nextLine().trim();
         if (input.equalsIgnoreCase(ABORT_COMMAND)) {
-            throw new IllegalArgumentException("Character creation aborted.");
+            throw new AbortException();
+        } else if (input.equalsIgnoreCase(OPTIONS_COMMAND)) {
+            printOptions(requestMessage);
         } else if (input.equalsIgnoreCase(HELP_COMMAND)) {
             System.out.println(HELP);
-        } else if (input.equalsIgnoreCase(OPTIONS_COMMAND)) {
+        }
+        return input;
+    }
 
+    private void printOptions(String requestedOptions) {
+        if (requestedOptions.equals(REQUEST_INPUT_STRENGTH)
+            || requestedOptions.equals(REQUEST_INPUT_INTELLIGENCE)
+                || requestedOptions.equals(REQUEST_INPUT_DEXTERITY)) {
+            System.out.println("Choose a value between 1 and 20");
+        } else {
+            System.out.println("You have the free choice"); //TODO: QUicks und Skills auflisten
         }
     }
 

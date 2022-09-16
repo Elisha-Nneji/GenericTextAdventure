@@ -30,7 +30,7 @@ public class Character {
     private int speed;
 
     public Character(String name, String appearance, String background, ArrayList<Quirk> quirks,
-            ArrayList<Skill> skills, int strength, int dexterity, int intelligence, int health, int speed) {
+            ArrayList<Skill> skills, int strength, int dexterity, int intelligence, int health) {
         this.name = name;
         this.appearance = appearance;
         this.background = background;
@@ -40,7 +40,7 @@ public class Character {
         this.dexterity = dexterity;
         this.intelligence = intelligence;
         this.health = health;
-        this.speed = speed;
+        this.speed = 5;     //TODO: Formel zum berechnen
 
         this.inventory = new Inventory();
     }
