@@ -17,13 +17,11 @@ public class CharacterCreator {
                         + "ABORT   - aborts the character creation";
     private String OPTIONS_COMMAND = "options";
     private String REQUEST_INPUT_NAME = "Name:";
-    private String REQUEST_INPUT_APPEARANCE = "Appearance:";
     private String REQUEST_INPUT_BACKGROUND = "Background:";
     private String REQUEST_INPUT_STRENGTH = "Strength:";
     private String REQUEST_INPUT_DEXTERITY = "Dexterity:";
     private String REQUEST_INPUT_INTELLIGENCE = "Intelligence:";
     private String REQUEST_INPUT_HEALTH = "Health:";
-    private String REQUEST_INPUT_SPEED = "Speed:";
     private String REQUEST_INPUT_QUIRKS = "Quirks: (SEPARATED BY " + LIST_SEPARATOR + ")";
     private String REQUEST_INPUT_SKILLS = "Skills: (SEPARATED BY " + LIST_SEPARATOR + ")";
 
@@ -43,7 +41,6 @@ public class CharacterCreator {
 
     public Character createCharacter() throws AbortException {
         String name = getInfo(REQUEST_INPUT_NAME);
-        String appearance = getInfo(REQUEST_INPUT_APPEARANCE);
         String background = getInfo(REQUEST_INPUT_BACKGROUND);
         int st = Integer.parseInt(getInfo(REQUEST_INPUT_STRENGTH)); //TODO: options anzeigen
         int dex = Integer.parseInt(getInfo(REQUEST_INPUT_DEXTERITY));
@@ -54,7 +51,7 @@ public class CharacterCreator {
         System.out.println(REQUEST_INPUT_SKILLS);
         List<String> skills = getStringList();
 
-        return new Character(name, appearance, background, null, null, st, dex, in, hlt);
+        return new Character(name, null, null, st, dex, in, hlt);
     }
 
     private String getInfo(String requestMessage) throws AbortException {

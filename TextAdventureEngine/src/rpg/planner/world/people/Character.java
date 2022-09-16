@@ -4,7 +4,7 @@ import rpg.planner.world.places.Place;
 import rpg.planner.world.things.Inventory;
 import rpg.planner.world.things.Thing;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author onyekachi
@@ -15,13 +15,10 @@ import java.util.ArrayList;
 public class Character {
 
     private String name;
-    private String appearance;
-    private String background;
-
-    private ArrayList<Quirk> quirks = new ArrayList<>();
-    private ArrayList<Skill> skills = new ArrayList<>();
-
-    private Inventory inventory = new Inventory();
+    private List<Quirk> quirks;
+    private List<Skill> skills;
+    private Place location;
+    private Inventory inventory;
 
     private int strength;
     private int dexterity;      //Geschicklichkeit
@@ -29,11 +26,9 @@ public class Character {
     private int health;
     private int speed;
 
-    public Character(String name, String appearance, String background, ArrayList<Quirk> quirks,
-            ArrayList<Skill> skills, int strength, int dexterity, int intelligence, int health) {
+    public Character(String name, List<Quirk> quirks, List<Skill> skills, int strength, int dexterity,
+                     int intelligence, int health) {
         this.name = name;
-        this.appearance = appearance;
-        this.background = background;
         this.quirks = quirks;
         this.skills = skills;
         this.strength = strength;
@@ -51,6 +46,10 @@ public class Character {
      */
     public void addIteam(Thing iteam) {
         inventory.add(iteam);
+    }
+
+    public void setLocation(Place newLocation) {
+        this.location = newLocation;
     }
 
     /**
@@ -71,14 +70,6 @@ public class Character {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setAppearance(String appearance) {
-        this.appearance = appearance;
-    }
-
-    public void setBackground(String background) {
-        this.background = background;
     }
 
     public String getName() {

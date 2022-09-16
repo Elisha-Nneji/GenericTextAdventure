@@ -12,11 +12,18 @@ import java.util.ArrayList;
  */
 public class Place {
 
-    private String identifier;
-    private String description;
+    private final String identifier;
+    private final String description;
+    private final int x;
+    private final int y;
     private Inventory inventory;
 
-    private ArrayList<Place> places = new ArrayList<Place>();
+    public Place(String identifier, String description, int x, int y) {
+        this.x = x;
+        this.y = y;
+        this.identifier = identifier;
+        this.description = description;
+    }
 
     public String getIdentifier() {
         return identifier;
@@ -24,21 +31,5 @@ public class Place {
 
     public String getDescription() {
         return description;
-    }
-
-    public Inventory getInventory() {
-        return inventory;
-    }
-
-    public ArrayList<Place> getPlaces() {
-        return places;
-    }
-
-    public void setIdentifier(String identifier) {
-        this.identifier = identifier;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 }
